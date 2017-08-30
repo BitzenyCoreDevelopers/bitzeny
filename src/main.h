@@ -19,6 +19,7 @@
 #include "sync.h"
 #include "txmempool.h"
 #include "uint256.h"
+#include "yescryptcache.h"
 
 #include <algorithm>
 #include <exception>
@@ -1065,6 +1066,8 @@ extern CCoinsViewCache *pcoinsTip;
 
 /** Global variable that points to the active block tree (protected by cs_main) */
 extern CBlockTreeDB *pblocktree;
+
+extern CBlockYescryptCache *yescryptCache;
 
 struct CBlockTemplate
 {

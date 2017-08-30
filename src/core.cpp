@@ -7,6 +7,8 @@
 
 #include "util.h"
 
+#include "yescryptcache.h"
+
 std::string COutPoint::ToString() const
 {
     return strprintf("COutPoint(%s, %u)", hash.ToString().substr(0,10), n);
@@ -212,12 +214,24 @@ uint64_t CTxOutCompressor::DecompressAmount(uint64_t x)
     return n;
 }
 
+
 extern "C" void yescrypt_hash(const char *input, char *output);
+extern CBlockYescryptCache *yescryptCache;
 
 uint256 CBlockHeader::GetHash() const
 {
     uint256 hash;
-    yescrypt_hash(BEGIN(nVersion), (char*)&hash);
+
+    if(yescryptCache) {
+        uint256 orig_hash = SerializeHash(*this);
+        if(!yescryptCache->ReadHash(orig_hash, hash)) {
+            yescrypt_hash(BEGIN(nVersion), (char*)&hash);
+            yescryptCache->WriteHash(orig_hash, hash);
+        }
+    } else {
+        yescrypt_hash(BEGIN(nVersion), (char*)&hash);
+    }
+
     return hash;
 }
 
