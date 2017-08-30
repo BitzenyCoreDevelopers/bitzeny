@@ -68,7 +68,8 @@ BITCOIN_CORE_H = \
   util.h \
   version.h \
   walletdb.h \
-  wallet.h
+  wallet.h \
+  yescryptcache.h
 
 JSON_H = \
   json/json_spirit.h \
@@ -95,7 +96,6 @@ libbitcoin_server_a_SOURCES = \
   coins.cpp \
   init.cpp \
   keystore.cpp \
-  leveldbwrapper.cpp \
   main.cpp \
   miner.cpp \
   net.cpp \
@@ -106,7 +106,6 @@ libbitcoin_server_a_SOURCES = \
   rpcnet.cpp \
   rpcrawtransaction.cpp \
   rpcserver.cpp \
-  txdb.cpp \
   txmempool.cpp \
   $(JSON_H) \
   $(BITCOIN_CORE_H)
@@ -124,6 +123,9 @@ libbitcoin_common_a_SOURCES = \
   base58.cpp \
   allocators.cpp \
   chainparams.cpp \
+  txdb.cpp \
+  leveldbwrapper.cpp \
+  yescryptcache.cpp \
   core.cpp \
   hash.cpp \
   hash/yescrypt-0.5/yescrypt.h \
@@ -181,6 +183,8 @@ bitzenyd_LDADD += $(BOOST_LIBS) $(BDB_LIBS)
 bitzeny_cli_LDADD = \
   libbitcoin_cli.a \
   libbitcoin_common.a \
+  $(LIBLEVELDB) \
+  $(LIBMEMENV) \
   $(BOOST_LIBS)
 bitzeny_cli_SOURCES = bitcoin-cli.cpp
 #
