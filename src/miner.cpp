@@ -427,7 +427,7 @@ CBlockTemplate* CreateNewBlockWithKey(CReserveKey& reservekey)
 
 bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
 {
-    uint256 hash = pblock->GetHash();
+    uint256 hash = pblock->GetPoWHash();
     uint256 hashTarget = CBigNum().SetCompact(pblock->nBits).getuint256();
 
     if (hash > hashTarget)
@@ -451,7 +451,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
         // Track how many getdata requests this block gets
         {
             LOCK(wallet.cs_wallet);
-            wallet.mapRequestCount[pblock->GetHash()] = 0;
+            wallet.mapRequestCount[pblock->GetPoWHash()] = 0;
         }
 
         // Process this block the same as if we had received it from another node
@@ -523,7 +523,7 @@ void static BitcoinMiner(CWallet *pwallet)
             unsigned int nHashesDone = 0;
 
             for (; nHashesDone < 200; nHashesDone++) {
-                hash = pblock->GetHash();
+                hash = pblock->GetPoWHash();
                 if (hash <= hashTarget) break;
                 pblock->nNonce++;
             }
