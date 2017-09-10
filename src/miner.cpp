@@ -427,7 +427,7 @@ CBlockTemplate* CreateNewBlockWithKey(CReserveKey& reservekey)
 
 bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
 {
-    uint256 hash = pblock->GetPoWHash();
+    uint256 hash = pblock->GetHashNoCache();
     uint256 hashTarget = CBigNum().SetCompact(pblock->nBits).getuint256();
 
     if (hash > hashTarget)
@@ -523,7 +523,7 @@ void static BitcoinMiner(CWallet *pwallet)
             unsigned int nHashesDone = 0;
 
             for (; nHashesDone < 200; nHashesDone++) {
-                hash = pblock->GetPoWHash();
+                hash = pblock->GetHashNoCache();
                 if (hash <= hashTarget) break;
                 pblock->nNonce++;
             }
