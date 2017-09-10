@@ -451,7 +451,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
         // Track how many getdata requests this block gets
         {
             LOCK(wallet.cs_wallet);
-            wallet.mapRequestCount[pblock->GetPoWHash()] = 0;
+            wallet.mapRequestCount[hash] = 0;
         }
 
         // Process this block the same as if we had received it from another node
