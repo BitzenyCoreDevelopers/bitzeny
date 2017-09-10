@@ -235,6 +235,13 @@ uint256 CBlockHeader::GetHash() const
     return hash;
 }
 
+uint256 CBlockHeader::GetPoWHash() const
+{
+    uint256 hash;
+    yescrypt_hash(BEGIN(nVersion), (char*)&hash);
+    return hash;
+}
+
 uint256 CBlock::BuildMerkleTree() const
 {
     vMerkleTree.clear();
