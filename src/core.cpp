@@ -235,7 +235,7 @@ uint256 CBlockHeader::GetHash() const
     return hash;
 }
 
-uint256 CBlockHeader::GetPoWHash() const
+uint256 CBlockHeader::GetHashNoCache() const
 {
     uint256 hash;
     yescrypt_hash(BEGIN(nVersion), (char*)&hash);
