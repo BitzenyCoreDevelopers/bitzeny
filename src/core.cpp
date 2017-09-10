@@ -222,9 +222,9 @@ uint256 CBlockHeader::GetHash() const
 {
     uint256 hash;
 
-    if(yescryptCache) {
+    if (yescryptCache) {
         uint256 orig_hash = SerializeHash(*this);
-        if(!yescryptCache->ReadHash(orig_hash, hash)) {
+        if (!yescryptCache->ReadHash(orig_hash, hash)) {
             yescrypt_hash(BEGIN(nVersion), (char*)&hash);
             yescryptCache->WriteHash(orig_hash, hash);
         }
