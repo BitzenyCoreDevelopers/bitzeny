@@ -565,7 +565,7 @@ void static BitcoinMiner(CWallet *pwallet)
                         if (GetTime() - nLogTime > 30 * 60)
                         {
                             nLogTime = GetTime();
-                            LogPrintf("hashmeter %6.0f khash/s\n", dHashesPerSec/1000.0);
+                            LogPrintf("hashmeter %6.0f hash/s\n", dHashesPerSec);
                         }
                     }
                 }
