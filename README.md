@@ -1,7 +1,9 @@
 BitZeny Core integration/staging tree
 =====================================
 
-http://bitzeny.org
+http://bitzeny.org (old website)  
+http:// (New website) << in preparation  
+http://bitzeny.info (Forum)
 
 * Copyright (c) 2014      BitZeny Core Developers
 * Copyright (c) 2009-2014 Bitcoin Core Developers
@@ -14,7 +16,44 @@ License
 BitZeny Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
 information or see http://opensource.org/licenses/MIT.
 
-Build bitzenyd on Ubuntu 14.04
+## Overview 
+
+symbol
+
+<div align="center">![Representation](https://github.com/BitzenyDevTeam/bitzeny-copy/blob/z1.1.x/src/qt/res/icons/bitcoin.png?raw=true)</div>
+
+### concept
+
+Simple and concise.  
+It is as sharp as **Katana**.
+
+### Load map
+
+* ~~New wallet~~
+* ~~Online Wallet~~
+* ~~Mining pool~~ 
+* ~~Forum~~
+* zenyhive(coinhive)
+* electrum-zeny
+* Exchange listing
+	* ~~C-CEX~~
+    * ~~Novaexchange~~
+	* Tradesatoshi >> Vote now
+    * Yo-bit
+    * coinexchange
+    * cryptopia
+    * Bleutrade
+    * Bittrex
+    * Poloniex
+* Accessory function	
+* Segwit attachment
+* Anonymous attachment
+* DEX attachment
+* Asset attachment
+* Crosschain platform attachment
+
+
+Build bitzenyd on Ubuntu 16.04
 -------------------
 
     sudo apt-get install build-essential
