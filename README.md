@@ -20,7 +20,7 @@ information or see http://opensource.org/licenses/MIT.
 
 symbol
 
-<div align="center">![Representation](https://github.com/BitzenyDevTeam/bitzeny-copy/blob/z1.1.x/src/qt/res/icons/bitcoin.png?raw=true)</div>
+![Representation](https://github.com/BitzenyDevTeam/bitzeny-copy/blob/z1.1.x/src/qt/res/icons/bitcoin.png?raw=true)
 
 ### concept
 
