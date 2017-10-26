@@ -1,9 +1,9 @@
 Gitian building
 ================
 
-*Setup instructions for a gitian build of Bitcoin using a Debian VM or physical system.*
+*Setup instructions for a gitian build of BitZeny using a Debian VM or physical system.*
 
-Gitian is the deterministic build process that is used to build the Bitcoin
+Gitian is the deterministic build process that is used to build the BitZeny
 Core executables [1]. It provides a way to be reasonably sure that the
 executables are really built from source on github. It also makes sure that
 the same, tested dependencies are used and statically built into the executable.
@@ -11,7 +11,7 @@ the same, tested dependencies are used and statically built into the executable.
 Multiple developers build the source code by following a specific descriptor
 ("recipe"), cryptographically sign the result, and upload the resulting signature.
 These results are compared and only if they match, the build is accepted and uploaded
-to bitcoin.org.
+to https://github.com/BitzenyCoreDevelopers/bitzeny/releases.
 
 More independent gitian builders are needed, which is why I wrote this
 guide. It is preferred to follow these steps yourself instead of using someone else's
@@ -29,7 +29,7 @@ Table of Contents
 - [Installing gitian](#installing-gitian)
 - [Setting up gitian images](#setting-up-gitian-images)
 - [Getting and building the inputs](#getting-and-building-the-inputs)
-- [Building Bitcoin](#building-bitcoin)
+- [Building BitZeny](#building-bitzeny)
 - [Building an alternative repository](#building-an-alternative-repository)
 - [Signing externally](#signing-externally)
 - [Uploading signatures](#uploading-signatures)
@@ -74,11 +74,11 @@ In the VirtualBox GUI click "Create" and choose the following parameters in the 
 - Disk size: at least 40GB; as low as 20GB *may* be possible, but better to err on the safe side 
 - Push the `Create` button
 
-Get the [Debian 7.4 net installer](http://cdimage.debian.org/debian-cd/7.4.0/amd64/iso-cd/debian-7.4.0-amd64-netinst.iso).
+Get the [Debian 8.x net installer](http://cdimage.debian.org/mirror/cdimage/archive/8.5.0/amd64/iso-cd/debian-8.5.0-amd64-netinst.iso).
 This DVD image can be validated using a SHA256 hashing tool, for example on
 Unixy OSes by entering the following in a terminal:
 
-    echo "b712a141bc60269db217d3b3e456179bd6b181645f90e4aac9c42ed63de492e9  /home/orion/Downloads/debian-7.4.0-amd64-netinst.iso" | sha256sum -c
+    echo "ad4e8c27c561ad8248d5ebc1d36eb172f884057bfeb2c22ead823f59fa8c3dff  debian-8.5.0-amd64-netinst.iso" | sha256sum -c
     # (must return OK)
 
 After creating the VM, we need to configure it. 
@@ -228,7 +228,7 @@ First we need to log in as `root` to set up dependencies and make sure that our
 user can use the sudo command. Type/paste the following in the terminal:
 
 ```bash
-apt-get install git ruby sudo apt-cacher-ng qemu-utils debootstrap lxc python-cheetah parted kpartx bridge-utils
+apt-get install git ruby sudo apt-cacher-ng qemu-utils debootstrap lxc python-cheetah parted kpartx bridge-utils make ubuntu-archive-keyring curl zip
 adduser debian sudo
 ```
 
@@ -238,15 +238,16 @@ go with the default (`/var/lib/lxc`).
 Then set up LXC and the rest with the following is a complex jumble of settings and workarounds:
 
 ```bash
-# the version of lxc-start in Debian 7.4 needs to run as root, so make sure
-# that the build script can exectute it without providing a password
+# the version of lxc-start in Debian needs to run as root, so make sure
+# that the build script can execute it without providing a password
 echo "%sudo ALL=NOPASSWD: /usr/bin/lxc-start" > /etc/sudoers.d/gitian-lxc
-# add cgroup for LXC
-echo "cgroup  /sys/fs/cgroup  cgroup  defaults  0   0" >> /etc/fstab
+echo "%sudo ALL=NOPASSWD: /usr/bin/lxc-execute" >> /etc/sudoers.d/gitian-lxc
 # make /etc/rc.local script that sets up bridge between guest and host
 echo '#!/bin/sh -e' > /etc/rc.local
 echo 'brctl addbr br0' >> /etc/rc.local
 echo 'ifconfig br0 10.0.3.2/24 up' >> /etc/rc.local
+echo 'iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE' >> /etc/rc.local
+echo 'echo 1 > /proc/sys/net/ipv4/ip_forward' >> /etc/rc.local
 echo 'exit 0' >> /etc/rc.local
 # make sure that USE_LXC is always set when logging in as debian,
 # and configure LXC IP addresses
@@ -268,22 +269,22 @@ The rest of the steps in this guide will be performed as that user.
 There is no `python-vm-builder` package in Debian, so we need to install it from source ourselves,
 
 ```bash
-wget http://archive.ubuntu.com/ubuntu/pool/universe/v/vm-builder/vm-builder_0.12.4+bzr489.orig.tar.gz
-echo "ec12e0070a007989561bfee5862c89a32c301992dd2771c4d5078ef1b3014f03  vm-builder_0.12.4+bzr489.orig.tar.gz" | sha256sum -c
+wget http://archive.ubuntu.com/ubuntu/pool/universe/v/vm-builder/vm-builder_0.12.4+bzr494.orig.tar.gz
+echo "76cbf8c52c391160b2641e7120dbade5afded713afaa6032f733a261f13e6a8e  vm-builder_0.12.4+bzr494.orig.tar.gz" | sha256sum -c
 # (verification -- must return OK)
-tar -zxvf vm-builder_0.12.4+bzr489.orig.tar.gz
-cd vm-builder-0.12.4+bzr489
+tar -zxvf vm-builder_0.12.4+bzr494.orig.tar.gz
+cd vm-builder-0.12.4+bzr494
 sudo python setup.py install
 cd ..
 ```
 
 **Note**: When sudo asks for a password, enter the password for the user *debian* not for *root*.
 
-Clone the git repositories for bitcoin and gitian,
+Clone the git repositories for bitzeny and gitian,
 
 ```bash
 git clone https://github.com/devrandom/gitian-builder.git
-git clone https://github.com/bitcoin/bitcoin
+git clone https://github.com/BitzenyCoreDevelopers/bitzeny
 ```
 
 Setting up gitian images
@@ -310,7 +311,7 @@ There will be a lot of warnings printed during build of the images. These can be
 Getting and building the inputs
 --------------------------------
 
-In [doc/release-process.md](release-process.md) in the bitcoin repository under 'Fetch and build inputs'.
+In [doc/release-process.md](release-process.md) in the bitzeny repository under 'Fetch and build inputs'.
 you will find a list of `wget` commands that can be executed to get the dependencies.
 
 I needed to add `--no-check-certificate` to the OpenSSL wget line to make it work.
@@ -332,20 +333,20 @@ tail -f var/install.log
 tail -f var/build.log
 ```
 
-Building Bitcoin
+Building BitZeny
 ----------------
 
-To build Bitcoin (for Linux and/or Windows) just follow the steps under 'perform
-gitian builds' in [doc/release-process.md](release-process.md) in the bitcoin repository.
+To build BitZeny (for Linux and/or Windows) just follow the steps under 'perform
+gitian builds' in [doc/release-process.md](release-process.md) in the bitzeny repository.
 
 Output from `gbuild` will look something like
 
-    Initialized empty Git repository in /home/debian/gitian-builder/inputs/bitcoin/.git/
+    Initialized empty Git repository in /home/debian/gitian-builder/inputs/bitzeny/.git/
     remote: Reusing existing pack: 35606, done.
     remote: Total 35606 (delta 0), reused 0 (delta 0)
     Receiving objects: 100% (35606/35606), 26.52 MiB | 4.28 MiB/s, done.
     Resolving deltas: 100% (25724/25724), done.
-    From https://github.com/bitcoin/bitcoin
+    From https://github.com/BitzenyCoreDevelopers/bitzeny
     ... (new tags, new branch etc)
     --- Building for precise i386 ---
     Stopping target if it is up
@@ -374,10 +375,10 @@ and inputs.
 
 For example:
 ```bash
-URL=https://github.com/laanwj/bitcoin.git
+URL=https://github.com/BitzenyCoreDevelopers/bitzeny.git
 COMMIT=2014_03_windows_unicode_path
-./bin/gbuild --commit bitcoin=${COMMIT} --url bitcoin=${URL} ../bitcoin/contrib/gitian-descriptors/gitian-linux.yml
-./bin/gbuild --commit bitcoin=${COMMIT} --url bitcoin=${URL} ../bitcoin/contrib/gitian-descriptors/gitian-win.yml
+./bin/gbuild --commit bitzeny=${COMMIT} --url bitzeny=${URL} ../bitzeny/contrib/gitian-descriptors/gitian-linux.yml
+./bin/gbuild --commit bitzeny=${COMMIT} --url bitzeny=${URL} ../bitzeny/contrib/gitian-descriptors/gitian-win.yml
 ```
 
 Signing externally
@@ -386,25 +387,29 @@ Signing externally
 If you want to do the PGP signing on another device that's possible too; just define `SIGNER` as mentioned
 and follow the steps in the build process as normally.
 
-    gpg: skipped "laanwj": secret key not available
+    gpg: skipped "username": secret key not available
 
 When you execute `gsign` you will get an error from GPG, which can be ignored. Copy the resulting `.assert` files
 in `gitian.sigs` to your signing machine and do
 
 ```bash
-    gpg --detach-sign ${VERSION}/${SIGNER}/bitcoin-build.assert
-    gpg --detach-sign ${VERSION}-win/${SIGNER}/bitcoin-build.assert
+    gpg --detach-sign ${VERSION}/${SIGNER}/bitzeny-build.assert
+    gpg --detach-sign ${VERSION}-win/${SIGNER}/bitzeny-build.assert
 ```
 
 This will create the `.sig` files that can be committed together with the `.assert` files to assert your
 gitian build.
+
+You can also verify the PGP signing is valid or not.
+```bash
+    gpg --verify bitzeny-build.assert.sig
+```
 
 Uploading signatures
 ---------------------
 
 After building and signing you can push your signatures (both the `.assert` and
 `.assert.sig` files) to the
-[bitcoin/gitian.sigs](https://github.com/bitcoin/gitian.sigs/) repository, or
-if not possible create a pull request. You can also mail the files to me
-(laanwj@gmail.com) and I'll commit them.
+[BitzenyCoreDevelopers/gitian.sigs](https://github.com/BitzenyCoreDevelopers/gitian.sigs/) repository, or
+if not possible create a pull request. You can also mail the files to us and we'll commit them.
 
