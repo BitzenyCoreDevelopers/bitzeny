@@ -36,7 +36,7 @@ Release Process
 	mkdir -p inputs; cd inputs/
 
  Register and download the Apple SDK (see OSX Readme for details)
-	visit https://developer.apple.com/downloads/download.action?path=Developer_Tools/xcode_4.6.3/xcode4630916281a.dmg
+	visit https://download.developer.apple.com/Developer_Tools/xcode_4.6.3/xcode4630916281a.dmg
  
  Using a Mac, create a tarball for the 10.7 SDK
 	tar -C /Volumes/Xcode/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/ -czf MacOSX10.7.sdk.tar.gz MacOSX10.7.sdk
