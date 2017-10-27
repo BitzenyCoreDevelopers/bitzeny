@@ -33,7 +33,7 @@ files:
 
 script: |
 
-  echo "18406961fd4a1ec5c7ea35c91d6a80a2f8bb797a2bd243a610bd75e13eff9aca  10cc648683617cca8bcbeae507888099b41b530c.tar.gz" | sha256sum -c
+  echo "d82a7f324d9e7bfe4e62a70b1500e97f9f4abffcdf0025f2e7caf1dec79d30e5  10cc648683617cca8bcbeae507888099b41b530c.tar.gz" | sha256sum -c
   echo "03ba62749b843b131c7304a044a98c6ffacd65b1399b921d69add0375f79d8ad  cctools-809.tar.gz" | sha256sum -c
   echo "2cf0484c87cf79b606b351a7055a247dae84093ae92c747a74e0cde2c8c8f83c  dyld-195.5.tar.gz" | sha256sum -c
   echo "97b75547b2bd761306ab3e15ae297f01e7ab9760b922bc657f4ef72e4e052142  ld64-127.2.tar.gz" | sha256sum -c
