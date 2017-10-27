@@ -17,7 +17,7 @@ files:
 - "openssl-1.0.2l.tar.gz"
 - "db-4.8.30.NC.tar.gz"
 - "miniupnpc-1.9.20140701.tar.gz"
-- "zlib-1.2.8.tar.gz"
+- "zlib-1.2.11.tar.gz"
 - "libpng-1.6.8.tar.gz"
 - "qrencode-3.4.3.tar.bz2"
 script: |
@@ -31,7 +31,7 @@ script: |
   echo "ce07195b659e75f4e1db43552860070061f156a98bb37b672b101ba6e3ddf30c  openssl-1.0.2l.tar.gz"  | sha256sum -c
   echo "12edc0df75bf9abd7f82f821795bcee50f42cb2e5f76a6a281b85732798364ef  db-4.8.30.NC.tar.gz"    | sha256sum -c
   echo "26f3985bad7768b8483b793448ae49414cdc4451d0ec83e7c1944367e15f9f07  miniupnpc-1.9.20140701.tar.gz"   | sha256sum -c
-  echo "36658cb768a54c1d4dec43c3116c27ed893e88b02ecfcb44f2166f9c0b7f2a0d  zlib-1.2.8.tar.gz"      | sha256sum -c
+  echo "c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1  zlib-1.2.11.tar.gz"     | sha256sum -c
   echo "32c7acf1608b9c8b71b743b9780adb7a7b347563dbfb4a5263761056da44cc96  libpng-1.6.8.tar.gz"    | sha256sum -c
   echo "dfd71487513c871bad485806bfd1fdb304dedc84d2b01a8fb8e0940b50597a98  qrencode-3.4.3.tar.bz2" | sha256sum -c
 
@@ -91,8 +91,8 @@ script: |
     install libminiupnpc.a  $INSTALLPREFIX/lib
     cd ..
     #
-    tar xzf $INDIR/zlib-1.2.8.tar.gz
-    cd zlib-1.2.8
+    tar xzf $INDIR/zlib-1.2.11.tar.gz
+    cd zlib-1.2.11
     CROSS_PREFIX=$HOST- ./configure --prefix=$INSTALLPREFIX --static
     make
     make install
