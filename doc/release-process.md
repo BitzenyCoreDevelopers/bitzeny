@@ -2,7 +2,7 @@ Release Process
 ====================
 
 * update translations (ping wumpus, Diapolo or tcatm on IRC)
-* see https://github.com/bitcoin/bitcoin/blob/master/doc/translation_process.md#syncing-with-transifex
+* see https://github.com/BitzenyCoreDevelopers/bitzeny/blob/z1.2.x/doc/translation_process.md#syncing-with-transifex
 
 * * *
 
@@ -15,22 +15,22 @@ Release Process
 
 ###tag version in git
 
-	git tag -s v(new version, e.g. 0.8.0)
+	git tag -s z(new version, e.g. 1.2.0)
 
 ###write release notes. git shortlog helps a lot, for example:
 
-	git shortlog --no-merges v(current version, e.g. 0.7.2)..v(new version, e.g. 0.8.0)
+	git shortlog --no-merges z(current version, e.g. 1.1.0)..z(new version, e.g. 1.2.0)
 
 * * *
 
 ##perform gitian builds
 
- From a directory containing the bitcoin source, gitian-builder and gitian.sigs
-  
-	export SIGNER=(your gitian key, ie bluematt, sipa, etc)
-	export VERSION=(new version, e.g. 0.8.0)
-	pushd ./bitcoin
-	git checkout v${VERSION}
+ From a directory containing the bitzeny source, gitian-builder and gitian.sigs
+
+	export SIGNER=(your github username)
+	export VERSION=(new version, e.g. 1.2.0)
+	pushd ./bitzeny
+	git checkout z${VERSION}
 	popd
 	pushd ./gitian-builder
 	mkdir -p inputs; cd inputs/
@@ -40,6 +40,16 @@ Release Process
  
  Using a Mac, create a tarball for the 10.7 SDK
 	tar -C /Volumes/Xcode/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/ -czf MacOSX10.7.sdk.tar.gz MacOSX10.7.sdk
+
+ Alternatively, you can use 7zip and SleuthKit to extract the files one by one.
+ The script contrib/macdeploy/extract-osx-sdk.sh automates this. First ensure
+ the dmg file is in the current directory, and then run the script. You may wish
+ to delete the intermediate 3.hfs file and MacOSX10.7.sdk (the directory) when
+ you've confirmed the extraction succeeded.
+
+	apt-get install p7zip-full sleuthkit
+	contrib/macdeploy/extract-osx-sdk.sh
+	rm -rf 3.hfs MacOSX10.7.sdk
 
  Fetch and build inputs: (first time, or when dependency versions change)
 
@@ -89,37 +99,37 @@ Release Process
 
  The expected SHA256 hashes of the intermediate inputs are:
 
-    b1f6f10148d4c4a1a69a58e703427578dc5a4de86eefd6b925e3abf3c8fbe542  bitcoin-deps-linux32-gitian-r9.zip
-    71e03e434af269dcbf3cb685cd1a5d51b8d2c904b67035eb4e5c1a2623b9f0df  bitcoin-deps-linux64-gitian-r9.zip
-    f29b7d9577417333fb56e023c2977f5726a7c297f320b175a4108cf7cd4c2d29  boost-linux32-1.55.0-gitian-r1.zip
-    88232451c4104f7eb16e469ac6474fd1231bd485687253f7b2bdf46c0781d535  boost-linux64-1.55.0-gitian-r1.zip
-    57e57dbdadc818cd270e7e00500a5e1085b3bcbdef69a885f0fb7573a8d987e1  qt-linux32-4.6.4-gitian-r1.tar.gz
-    60eb4b9c5779580b7d66529efa5b2836ba1a70edde2a0f3f696d647906a826be  qt-linux64-4.6.4-gitian-r1.tar.gz
-    60dc2d3b61e9c7d5dbe2f90d5955772ad748a47918ff2d8b74e8db9b1b91c909  boost-win32-1.55.0-gitian-r6.zip
-    f65fcaf346bc7b73bc8db3a8614f4f6bee2f61fcbe495e9881133a7c2612a167  boost-win64-1.55.0-gitian-r6.zip
-    2af17b1968bd7d46b260c8d16474e1f339cde1b9e96265c80f6626ea0c2785a9  bitcoin-deps-win32-gitian-r16.zip
-    7608bdf7848101d48ba8a296cb9c29ac68193405f11d8075fb46154ff3476233  bitcoin-deps-win64-gitian-r16.zip
-    963e3e5e85879010a91143c90a711a5d1d5aba992e38672cdf7b54e42c56b2f1  qt-win32-5.2.0-gitian-r3.zip
-    751c579830d173ef3e6f194e83d18b92ebef6df03289db13ab77a52b6bc86ef0  qt-win64-5.2.0-gitian-r3.zip
-    e2e403e1a08869c7eed4d4293bce13d51ec6a63592918b90ae215a0eceb44cb4  protobuf-win32-2.5.0-gitian-r4.zip
-    a0999037e8b0ef9ade13efd88fee261ba401f5ca910068b7e0cd3262ba667db0  protobuf-win64-2.5.0-gitian-r4.zip
+	63e4f7f9ff16cc8832c851bfe132127735e47cd157de572f10af00254d3bdae3  bitcoin-deps-linux32-gitian-r9.zip
+	f7eab18d45887161532288517789bbf2b75cc12bf70e896c8f86f1d9f1997feb  bitcoin-deps-linux64-gitian-r9.zip
+	f29b7d9577417333fb56e023c2977f5726a7c297f320b175a4108cf7cd4c2d29  boost-linux32-1.55.0-gitian-r1.zip
+	88232451c4104f7eb16e469ac6474fd1231bd485687253f7b2bdf46c0781d535  boost-linux64-1.55.0-gitian-r1.zip
+	57e57dbdadc818cd270e7e00500a5e1085b3bcbdef69a885f0fb7573a8d987e1  qt-linux32-4.6.4-gitian-r1.tar.gz
+	60eb4b9c5779580b7d66529efa5b2836ba1a70edde2a0f3f696d647906a826be  qt-linux64-4.6.4-gitian-r1.tar.gz
+	60dc2d3b61e9c7d5dbe2f90d5955772ad748a47918ff2d8b74e8db9b1b91c909  boost-win32-1.55.0-gitian-r6.zip
+	f65fcaf346bc7b73bc8db3a8614f4f6bee2f61fcbe495e9881133a7c2612a167  boost-win64-1.55.0-gitian-r6.zip
+	576ca55db9b710b6a2e6802fa88046288bcb3d58b422a602edd790d36745e0ff  bitcoin-deps-win32-gitian-r16.zip
+	9f6381f56ecb9467dfce4cd78018780c3f703fc091fe6cec52342d783d2576ae  bitcoin-deps-win64-gitian-r16.zip
+	eab65e30aa6e3c9efac8613e6337093d718bf037fed136dabcbf1e0f789bcea4  qt-win32-5.2.0-gitian-r3.zip
+	2cfae7afcc3db774360cab50124c8124d0f6ca6ee1ee35b8fd00d9d0a4751f19  qt-win64-5.2.0-gitian-r3.zip
+	e2e403e1a08869c7eed4d4293bce13d51ec6a63592918b90ae215a0eceb44cb4  protobuf-win32-2.5.0-gitian-r4.zip
+	a0999037e8b0ef9ade13efd88fee261ba401f5ca910068b7e0cd3262ba667db0  protobuf-win64-2.5.0-gitian-r4.zip
 
- Build bitcoind and bitcoin-qt on Linux32, Linux64, and Win32:
-  
+ Build bitzenyd and bitzeny-qt on Linux32, Linux64, and Win32:
+
 	./bin/gbuild --commit bitzeny=z${VERSION} ../bitzeny/contrib/gitian-descriptors/gitian-linux.yml
-	#./bin/gsign --signer $SIGNER --release ${VERSION} --destination ../gitian.sigs/ ../bitzeny/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../bitzeny/contrib/gitian-descriptors/gitian-linux.yml
 	pushd build/out
 	zip -r bitzeny-${VERSION}-linux-gitian.zip *
 	mv bitzeny-${VERSION}-linux-gitian.zip ../../../
 	popd
 	./bin/gbuild --commit bitzeny=z${VERSION} ../bitzeny/contrib/gitian-descriptors/gitian-win.yml
-	#./bin/gsign --signer $SIGNER --release ${VERSION}-win --destination ../gitian.sigs/ ../bitzeny/contrib/gitian-descriptors/gitian-win.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-win --destination ../gitian.sigs/ ../bitzeny/contrib/gitian-descriptors/gitian-win.yml
 	pushd build/out
 	zip -r bitzeny-${VERSION}-win-gitian.zip *
 	mv bitzeny-${VERSION}-win-gitian.zip ../../../
 	popd
 	./bin/gbuild --commit bitzeny=z${VERSION} ../bitzeny/contrib/gitian-descriptors/gitian-osx-bitcoin.yml
-	#./bin/gsign --signer $SIGNER --release ${VERSION}-osx --destination ../gitian.sigs/ ../bitzeny/contrib/gitian-descriptors/gitian-osx-bitcoin.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-osx --destination ../gitian.sigs/ ../bitzeny/contrib/gitian-descriptors/gitian-osx-bitcoin.yml
 	pushd build/out
 	mv BitZeny-Qt.dmg ../../../
 	popd
@@ -127,29 +137,29 @@ Release Process
 
   Build output expected:
 
-  1. linux 32-bit and 64-bit binaries + source (bitcoin-${VERSION}-linux-gitian.zip)
-  2. windows 32-bit and 64-bit binaries + installer + source (bitcoin-${VERSION}-win-gitian.zip)
-  3. OSX installer (Bitcoin-Qt.dmg)
+  1. linux 32-bit and 64-bit binaries + source (bitzeny-${VERSION}-linux-gitian.zip)
+  2. windows 32-bit and 64-bit binaries + installer + source (bitzeny-${VERSION}-win-gitian.zip)
+  3. OSX installer (BitZeny-Qt.dmg)
   4. Gitian signatures (in gitian.sigs/${VERSION}[-win|-osx]/(your gitian key)/
 
 repackage gitian builds for release as stand-alone zip/tar/installer exe
 
 **Linux .tar.gz:**
 
-	unzip bitcoin-${VERSION}-linux-gitian.zip -d bitcoin-${VERSION}-linux
-	tar czvf bitcoin-${VERSION}-linux.tar.gz bitcoin-${VERSION}-linux
-	rm -rf bitcoin-${VERSION}-linux
+	unzip bitzeny-${VERSION}-linux-gitian.zip -d bitzeny-${VERSION}-linux
+	tar czvf bitzeny-${VERSION}-linux.tar.gz bitzeny-${VERSION}-linux
+	rm -rf bitzeny-${VERSION}-linux
 
 **Windows .zip and setup.exe:**
 
-	unzip bitcoin-${VERSION}-win-gitian.zip -d bitcoin-${VERSION}-win
-	mv bitcoin-${VERSION}-win/bitcoin-*-setup.exe .
-	zip -r bitcoin-${VERSION}-win.zip bitcoin-${VERSION}-win
-	rm -rf bitcoin-${VERSION}-win
+	unzip bitzeny-${VERSION}-win-gitian.zip -d bitzeny-${VERSION}-win
+	mv bitzeny-${VERSION}-win/*/bitzeny-*-setup.exe .
+	zip -r bitzeny-${VERSION}-win.zip bitzeny-${VERSION}-win
+	rm -rf bitzeny-${VERSION}-win
 
 **Mac OS X .dmg:**
 
-	mv Bitcoin-Qt.dmg bitcoin-${VERSION}-osx.dmg
+	mv BitZeny-Qt.dmg bitzeny-${VERSION}-osx.dmg
 
 ###Next steps:
 
@@ -173,42 +183,36 @@ Commit your signature to gitian.sigs:
 
     - Code-sign MacOSX .dmg
 
-  Note: only Gavin has the code-signing keys currently.
+  Note: only ZNY.Dev has the code-signing keys currently.
 
 - Create `SHA256SUMS.asc` for builds, and PGP-sign it. This is done manually.
-  Include all the files to be uploaded. The file has `sha256sum` format with a
-  simple header at the top:
+  Include all the files to be uploaded.
+
+SHA256SUMS
+```
+88909c816f4fc9f5fc0d10b6706db0fa2a7e40029b587dea256324d09dfdf8d2  bitzeny-1.2.0-linux.tar.gz
+471d63dbedee9888a72969f032664b5f520a0f304f11e6e1bd9557463a0be88f  bitzeny-1.2.0-osx.dmg
+6305c3bf611c03fcb3d8dd75912ff18c95edeedb403a856f838357d0d2a9c249  bitzeny-1.2.0-win.zip
+19c561de87d1d4d554358d42ff5e0287a42b3396e4634336ba7f75470e1b9e44  bitzeny-1.2.0-win32-setup.exe
+61c60c186944c0a56830d426a984deecca6d78798655099419ba4a14837018ea  bitzeny-1.2.0-win64-setup.exe
+```
 
 ```
+gpg --clearsign --digest-algo SHA256 SHA256SUMS
+```
+
+SHA256SUMS.asc
+```
+-----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA256
 
-0060f7d38b98113ab912d4c184000291d7f026eaf77ca5830deec15059678f54  bitcoin-x.y.z-linux.tar.gz
+88909c816f4fc9f5fc0d10b6706db0fa2a7e40029b587dea256324d09dfdf8d2  bitzeny-1.2.0-linux.tar.gz
+471d63dbedee9888a72969f032664b5f520a0f304f11e6e1bd9557463a0be88f  bitzeny-1.2.0-osx.dmg
+6305c3bf611c03fcb3d8dd75912ff18c95edeedb403a856f838357d0d2a9c249  bitzeny-1.2.0-win.zip
+19c561de87d1d4d554358d42ff5e0287a42b3396e4634336ba7f75470e1b9e44  bitzeny-1.2.0-win32-setup.exe
+61c60c186944c0a56830d426a984deecca6d78798655099419ba4a14837018ea  bitzeny-1.2.0-win64-setup.exe
+-----BEGIN PGP SIGNATURE-----
 ...
 ```
 
-- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the bitcoin.org server
-
-- Update bitcoin.org version
-
-  - Make a pull request to add a file named `YYYY-MM-DD-vX.Y.Z.md` with the release notes
-  to https://github.com/bitcoin/bitcoin.org/tree/master/_releases
-   ([Example for 0.9.2.1](https://raw.githubusercontent.com/bitcoin/bitcoin.org/master/_releases/2014-06-19-v0.9.2.1.md)).
-
-  - After the pull request is merged, the website will automatically show the newest version, as well
-    as update the OS download links. Ping Saivann in case anything goes wrong
-
-- Announce the release:
-
-  - Release sticky on bitcointalk: https://bitcointalk.org/index.php?board=1.0
-
-  - Bitcoin-development mailing list
-
-  - Update title of #bitcoin on Freenode IRC
-
-  - Optionally reddit /r/Bitcoin, ... but this will usually sort out itself
-
-- Notify BlueMatt so that he can start building [https://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin](the PPAs)
-
-- Add release notes for the new version to the directory `doc/release-notes` in git master
-
-- Celebrate 
+- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the https://github.com/BitzenyCoreDevelopers/bitzeny/releases server
