@@ -66,7 +66,7 @@ Build bitzenyd on Ubuntu 16.04
     sudo apt-get install libdb4.8-dev
     sudo apt-get install libdb4.8++-dev
     
-    git clone https://github.com/bitzeny/bitzeny.git
+    git clone https://github.com/BitzenyCoreDevelopers/bitzeny.git
     cd bitzeny
     ./autogen.sh
     ./configure --without-miniupnpc --without-gui --disable-tests
