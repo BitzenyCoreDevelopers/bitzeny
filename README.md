@@ -3,7 +3,7 @@ BitZeny Core integration/staging tree
 
 http://bitzeny.org (old website)  
 http:// (New website) << in preparation  
-http://bitzeny.info (Forum)
+https://bitzeny.info (Forum)
 
 * Copyright (c) 2014      BitZeny Core Developers
 * Copyright (c) 2009-2014 Bitcoin Core Developers
@@ -22,7 +22,7 @@ symbol
 
 ![Representation](https://github.com/BitzenyDevTeam/bitzeny-copy/blob/z1.1.x/src/qt/res/icons/bitcoin.png?raw=true)
 
-### concept
+### Concept
 
 Simple and concise.  
 It is as sharp as **Katana**.
@@ -34,7 +34,7 @@ It is as sharp as **Katana**.
 * ~~Mining pool~~ 
 * ~~Forum~~
 * zenyhive(coinhive)
-* electrum-zeny
+* Electrum-Zeny
 * Exchange listing
 	* ~~C-CEX~~
     * ~~Novaexchange~~
