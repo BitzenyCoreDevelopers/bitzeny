@@ -5,7 +5,7 @@ install:
   - sudo apt-get -qq update
   - sudo apt-get install --no-install-recommends --no-upgrade -qq build-essential libtool autotools-dev autoconf libssl-dev libboost-all-dev pkg-config software-properties-common git libdb4.8-dev libdb4.8++-dev
 script:
-  - ./autogen.sh && ./configure --prefix=/usr --without-miniupnpc --without-gui && make -j4 && make -j4 test
+  - ./autogen.sh && ./configure --prefix=/usr --without-miniupnpc --without-gui && make -j4
 after_script:
   - echo $TRAVIS_COMMIT_RANGE
   - echo $TRAVIS_COMMIT_LOG
