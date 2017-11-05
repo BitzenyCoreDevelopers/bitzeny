@@ -1,0 +1,20 @@
+language: C++
+before_install:
+  - sudo add-apt-repository ppa:bitcoin/bitcoin -y
+  - sudo apt-get -qq update
+addons:
+  apt:
+    packages:
+    - build-essential
+    - libtool
+    - autotools-dev
+    - autoconf
+    - libssl-dev
+    - libboost-all-dev
+    - pkg-config
+    - software-properties-common
+    - git
+    - libdb4.8-dev
+    - libdb4.8++-dev
+script:
+  - ./autogen.sh && ./configure --prefix=/usr --without-miniupnpc --without-gui && make && make test
