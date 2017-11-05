@@ -1,4 +1,5 @@
 language: C++
+cache: ccache
 install:
   - sudo add-apt-repository ppa:bitcoin/bitcoin -y
   - sudo apt-get -qq update
