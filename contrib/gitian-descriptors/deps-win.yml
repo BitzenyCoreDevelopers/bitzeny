@@ -16,7 +16,7 @@ remotes: []
 files:
 - "openssl-1.0.2l.tar.gz"
 - "db-4.8.30.NC.tar.gz"
-- "miniupnpc-1.9.20140701.tar.gz"
+- "miniupnpc-1.9.20150206.tar.gz"
 - "zlib-1.2.11.tar.gz"
 - "libpng-1.6.8.tar.gz"
 - "qrencode-3.4.3.tar.bz2"
@@ -30,7 +30,7 @@ script: |
   # Input Integrity Check
   echo "ce07195b659e75f4e1db43552860070061f156a98bb37b672b101ba6e3ddf30c  openssl-1.0.2l.tar.gz"  | sha256sum -c
   echo "12edc0df75bf9abd7f82f821795bcee50f42cb2e5f76a6a281b85732798364ef  db-4.8.30.NC.tar.gz"    | sha256sum -c
-  echo "26f3985bad7768b8483b793448ae49414cdc4451d0ec83e7c1944367e15f9f07  miniupnpc-1.9.20140701.tar.gz"   | sha256sum -c
+  echo "230d3ad5a3047daa77f99602503d798f720428207217ebfbfe2a4f7762b029e7  miniupnpc-1.9.20150206.tar.gz"   | sha256sum -c
   echo "c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1  zlib-1.2.11.tar.gz"     | sha256sum -c
   echo "32c7acf1608b9c8b71b743b9780adb7a7b347563dbfb4a5263761056da44cc96  libpng-1.6.8.tar.gz"    | sha256sum -c
   echo "dfd71487513c871bad485806bfd1fdb304dedc84d2b01a8fb8e0940b50597a98  qrencode-3.4.3.tar.bz2" | sha256sum -c
@@ -67,8 +67,8 @@ script: |
     make install_lib install_include
     cd ../..
     #
-    tar xzf $INDIR/miniupnpc-1.9.20140701.tar.gz
-    cd miniupnpc-1.9.20140701
+    tar xzf $INDIR/miniupnpc-1.9.20150206.tar.gz
+    cd miniupnpc-1.9.20150206
     echo "
   --- miniupnpc-1.9/Makefile.mingw.orig   2013-09-29 18:52:51.014087958 -1000
   +++ miniupnpc-1.9/Makefile.mingw        2013-09-29 19:09:29.663318691 -1000
