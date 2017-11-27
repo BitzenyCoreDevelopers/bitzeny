@@ -108,7 +108,7 @@ script: |
 
   tar -C ${BUILD_BASE} -xf ${SOURCE_FILE}
   pushd ${BUILD_DIR}
-  CFLAGS="${INT_CFLAGS} ${INT_CPPFLAGS}" make $MAKEOPTS OS=Darwin CC="${INT_CC}" AR="${INT_AR}" libminiupnpc.a
+  CFLAGS="${INT_CFLAGS} ${INT_CPPFLAGS}" make $MAKEOPTS OS=Darwin CC="${INT_CC}" AR="${INT_AR}" LIBTOOL="${INT_LIBTOOL}" libminiupnpc.a
   install -d ${PREFIX}/include/miniupnpc
   install *.h ${PREFIX}/include/miniupnpc
   install libminiupnpc.a  ${PREFIX}/lib
