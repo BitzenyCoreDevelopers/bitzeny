@@ -37,7 +37,7 @@ Release Process
 
  Register and download the Apple SDK (see OSX Readme for details)
 	visit https://download.developer.apple.com/Developer_Tools/xcode_4.6.3/xcode4630916281a.dmg
- 
+
  Using a Mac, create a tarball for the 10.7 SDK
 	tar -C /Volumes/Xcode/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/ -czf MacOSX10.7.sdk.tar.gz MacOSX10.7.sdk
 
@@ -60,7 +60,7 @@ Release Process
 	wget 'ftp://ftp.simplesystems.org/pub/png/src/history/libpng16/libpng-1.6.8.tar.gz'
 	wget 'https://fukuchi.org/works/qrencode/qrencode-3.4.3.tar.bz2'
 	wget 'https://downloads.sourceforge.net/project/boost/boost/1.55.0/boost_1_55_0.tar.bz2'
-	wget 'https://svn.boost.org/trac/boost/raw-attachment/ticket/7262/boost-mingw.patch' -O \ 
+	wget 'https://svn.boost.org/trac/boost/raw-attachment/ticket/7262/boost-mingw.patch' -O \
 	     boost-mingw-gas-cross-compile-2013-03-03.patch
 	wget 'https://download.qt.io/archive/qt/5.2/5.2.0/single/qt-everywhere-opensource-src-5.2.0.tar.gz'
 	wget 'https://download.qt-project.org/archive/qt/4.6/qt-everywhere-opensource-src-4.6.4.tar.gz'
@@ -75,6 +75,7 @@ Release Process
 	     clang-llvm-3.2-x86-linux-ubuntu-12.04.tar.gz
 	wget 'https://raw.githubusercontent.com/theuni/osx-cross-depends/master/patches/cdrtools/genisoimage.diff' -O \
 	     cdrkit-deterministic.patch
+	wget 'http://ftp.jaist.ac.jp/pub/qtproject/archive/qt/5.2/5.2.1/single/qt-everywhere-opensource-src-5.2.1.tar.gz'
 	cd ..
 	./bin/gbuild ../bitzeny/contrib/gitian-descriptors/boost-linux.yml
 	mv build/out/boost-*.zip inputs/
