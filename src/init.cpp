@@ -17,6 +17,7 @@
 #include "compat/sanity.h"
 #include "consensus/validation.h"
 #include "fs.h"
+#include "hashdb.h"
 #include "httpserver.h"
 #include "httprpc.h"
 #include "key.h"
@@ -246,6 +247,8 @@ void Shutdown()
         pcoinsdbview = nullptr;
         delete pblocktree;
         pblocktree = nullptr;
+        delete phashdb;
+        phashdb = nullptr;
     }
 #ifdef ENABLE_WALLET
     for (CWalletRef pwallet : vpwallets) {
@@ -1427,8 +1430,10 @@ bool AppInitMain(boost::thread_group& threadGroup, CScheduler& scheduler)
                 delete pcoinsdbview;
                 delete pcoinscatcher;
                 delete pblocktree;
+                delete phashdb;
 
                 pblocktree = new CBlockTreeDB(nBlockTreeDBCache, false, fReset);
+                phashdb = new CHashDB(nBlockTreeDBCache, false, fReset); // TODO: add arugument for CHashDB
 
                 if (fReset) {
                     pblocktree->WriteReindexing(true);

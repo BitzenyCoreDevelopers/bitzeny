@@ -7,6 +7,7 @@
 #define BITCOIN_CHAIN_H
 
 #include "arith_uint256.h"
+#include "hashdb.h"
 #include "primitives/block.h"
 #include "pow.h"
 #include "tinyformat.h"
@@ -416,9 +417,9 @@ public:
         block.nTime           = nTime;
         block.nBits           = nBits;
         block.nNonce          = nNonce;
-        return block.GetHash();
-    }
 
+        return phashdb->GetHash(block);
+    }
 
     std::string ToString() const
     {
