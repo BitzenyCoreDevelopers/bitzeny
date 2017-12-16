@@ -155,13 +155,12 @@ public:
             }
         };
 
-        //TODO: fill real data
         chainTxData = ChainTxData{
-            // Data as of block 000000000000000000d97e53664d17967bd4ee50b23abb92e54a34eb222d15ae (height 478913).
-            1501801925, // * UNIX timestamp of last known number of transactions
-            243756039,  // * total number of transactions between genesis and that timestamp
+            // Data as of block 00000000f8022cd21279bd926e6821c8d156129941fed9f94d3ba152aec9651a (height 1080267).
+            1513452656, // * UNIX timestamp of last known number of transactions
+            1529508,    // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
-            3.1         // * estimated number of transactions per second after that timestamp
+            0.015       // * estimated number of transactions per second after that timestamp
         };
     }
 };
