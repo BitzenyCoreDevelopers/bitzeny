@@ -128,6 +128,7 @@ public:
         // Note that of those with the service bits flag, most only support a subset of possible options
         vSeeds.emplace_back("seed.bitzeny.org", false);
         vSeeds.emplace_back("bitzeny.seed.lapool.me", false); // https://lapool.me/seed/
+        vSeeds.emplace_back("seed.bitzeny.jp", false); // https://bitzeny.info/d/30-bitzeny/25
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,81);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
@@ -221,7 +222,8 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        // vSeeds.emplace_back("testnet-seed.bitcoin.jonasschnelli.ch", true);
+        vSeeds.emplace_back("seed.bitzeny.org", false);
+        vSeeds.emplace_back("testnet-seed.bitzeny.jp", false); // https://bitzeny.info/d/30-bitzeny/25
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);

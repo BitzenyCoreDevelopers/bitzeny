@@ -1,8 +1,18 @@
-# List of fixed seed nodes for testnet
+# List of fixed seed nodes for main
 # 223.252.173.147:8333
 # [2001:0:4137:9e76:1025:4e5:acb0:22cd]:8333
-150.95.183.219:9253  # Conoha
-163.172.141.166:9253 # Scaleway
+
+# Mining Pools
+121.2.17.19:9253     # SO-NET
+150.95.179.121:9253  # CNODE-JP
+153.122.85.155:9253  # DIX-CL
+153.126.144.191:9253 # SAKURA-NET
+27.96.51.12:9253     # SR-A-NET
+27.96.51.13:9253     # SR-A-NET
+
+# Unknown
+150.95.183.219:9253  # CNODE-JP
+163.172.141.166:9253 # ONLINE_NET_DEDICATED_SERVERS
 
 # Onion nodes
 # thfsmmn2jbitcoin.onion
