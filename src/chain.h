@@ -418,6 +418,7 @@ public:
         block.nBits           = nBits;
         block.nNonce          = nNonce;
 
+        assert(phashdb != nullptr); // FIXME: Benchmark and tests don't initialize hash database
         return phashdb->GetHash(block);
     }
 
