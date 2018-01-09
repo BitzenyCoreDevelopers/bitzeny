@@ -3499,12 +3499,14 @@ CBlockIndex * InsertBlockIndex(uint256 hash)
 
 bool static LoadBlockIndexDB(const CChainParams& chainparams)
 {
+    uiInterface.InitMessage(_("Loading block index from disk..."));
     if (!pblocktree->LoadBlockIndexGuts(chainparams.GetConsensus(), InsertBlockIndex))
         return false;
 
     boost::this_thread::interruption_point();
 
     // Calculate nChainWork
+    uiInterface.InitMessage(_("Sorting block index..."));
     std::vector<std::pair<int, CBlockIndex*> > vSortedByHeight;
     vSortedByHeight.reserve(mapBlockIndex.size());
     for (const std::pair<uint256, CBlockIndex*>& item : mapBlockIndex)
@@ -3513,6 +3515,8 @@ bool static LoadBlockIndexDB(const CChainParams& chainparams)
         vSortedByHeight.push_back(std::make_pair(pindex->nHeight, pindex));
     }
     sort(vSortedByHeight.begin(), vSortedByHeight.end());
+
+    uiInterface.InitMessage(_("Calculating nChainWork..."));
     for (const std::pair<int, CBlockIndex*>& item : vSortedByHeight)
     {
         CBlockIndex* pindex = item.second;
