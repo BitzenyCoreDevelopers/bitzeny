@@ -237,7 +237,11 @@ public:
         fRequireStandard = false;
         fMineBlocksOnDemand = false;
 
-        checkpointData = (CCheckpointData) {};
+        checkpointData = (CCheckpointData) {
+            {
+                {0, uint256S("0x00003a0c79f595bddb7f37a22eb63fd23c541ab6a7dd7efd0215e7029bde225c")},
+            }
+        };
 
         chainTxData = ChainTxData{
             0,
