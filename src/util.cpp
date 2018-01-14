@@ -71,6 +71,7 @@
 #endif
 
 #include <boost/algorithm/string/case_conv.hpp> // for to_lower()
+#include <boost/date_time.hpp>
 #include <boost/algorithm/string/predicate.hpp> // for startswith() and endswith()
 #include <boost/interprocess/sync/file_lock.hpp>
 #include <boost/program_options/detail/config_file.hpp>
@@ -945,12 +946,10 @@ int GetNumCores()
 
 std::string CopyrightHolders(const std::string& strPrefix)
 {
-    std::string strCopyrightHolders = strPrefix + strprintf(_(COPYRIGHT_HOLDERS), _(COPYRIGHT_HOLDERS_SUBSTITUTION));
-
-    // Check for untranslated substitution to make sure Bitcoin Core copyright is not removed by accident
-    if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("Bitcoin Core") == std::string::npos) {
-        strCopyrightHolders += "\n" + strPrefix + "The Bitcoin Core developers";
-    }
+    unsigned short nCopyrightYear = boost::posix_time::second_clock::local_time().date().year();
+    std::string strCopyrightHolders;
+    strCopyrightHolders += "\n" + strprintf(strPrefix, 2009, nCopyrightYear) + " The Bitcoin Core developers";
+    strCopyrightHolders += "\n" + strprintf(strPrefix, 2014, nCopyrightYear) + " The BitZeny Core developers";
     return strCopyrightHolders;
 }
 
