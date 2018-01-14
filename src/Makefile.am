@@ -259,7 +259,7 @@ libbitcoin_wallet_a_SOURCES = \
 # crypto primitives library
 crypto_libbitcoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS)
 crypto_libbitcoin_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libbitcoin_crypto_a_CFLAGS = $(AM_CFLAGS) -fPIC -fomit-frame-pointer
+crypto_libbitcoin_crypto_a_CFLAGS = $(AM_CFLAGS) $(PIE_FLAGS) -fomit-frame-pointer
 crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/aes.cpp \
   crypto/aes.h \
@@ -279,6 +279,16 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sha512.cpp \
   crypto/sha512.h \
   crypto/yescrypt-0.5/yescrypt.c
+
+noinst_HEADERS = \
+  crypto/yescrypt-0.5/sha256.h \
+  crypto/yescrypt-0.5/sha256_c.h \
+  crypto/yescrypt-0.5/sysendian.h \
+  crypto/yescrypt-0.5/yescrypt.h \
+  crypto/yescrypt-0.5/yescrypt-best_c.h \
+  crypto/yescrypt-0.5/yescrypt-opt_c.h \
+  crypto/yescrypt-0.5/yescrypt-platform_c.h \
+  crypto/yescrypt-0.5/yescrypt-simd_c.h
 
 if USE_ASM
 crypto_libbitcoin_crypto_a_SOURCES += crypto/sha256_sse4.cpp
