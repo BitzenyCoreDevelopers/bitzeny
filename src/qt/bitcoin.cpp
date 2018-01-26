@@ -43,6 +43,7 @@
 
 #include <QApplication>
 #include <QDebug>
+#include <QDir>
 #include <QLibraryInfo>
 #include <QLocale>
 #include <QMessageBox>
@@ -122,6 +123,11 @@ static void initTranslations(QTranslator &qtTranslatorBase, QTranslator &qtTrans
     // Get desired locale (e.g. "de_DE")
     // 1) System default language
     QString lang_territory = GetLangTerritory();
+
+    // If system language is not supported, fallback to American English
+    QDir translations(":translations");
+    if (!translations.entryList().contains(lang_territory))
+        lang_territory = "en_US";
 
     // Convert to "de" only by truncating "_DE"
     QString lang = lang_territory;

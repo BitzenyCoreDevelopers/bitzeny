@@ -77,6 +77,7 @@
 #endif
 
 #include <boost/algorithm/string/case_conv.hpp> // for to_lower()
+#include <boost/date_time.hpp>
 #include <boost/algorithm/string/predicate.hpp> // for startswith() and endswith()
 #include <boost/program_options/detail/config_file.hpp>
 #include <boost/thread.hpp>
@@ -87,8 +88,8 @@
 // Application startup time (used for uptime calculation)
 const int64_t nStartupTime = GetTime();
 
-const char * const BITCOIN_CONF_FILENAME = "bitcoin.conf";
-const char * const BITCOIN_PID_FILENAME = "bitcoind.pid";
+const char * const BITCOIN_CONF_FILENAME = "bitzeny.conf";
+const char * const BITCOIN_PID_FILENAME = "bitzeny.pid";
 
 ArgsManager gArgs;
 bool fPrintToConsole = false;
@@ -530,7 +531,7 @@ fs::path GetDefaultDataDir()
     // Unix: ~/.bitcoin
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Bitcoin";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "BitZeny";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -540,10 +541,10 @@ fs::path GetDefaultDataDir()
         pathRet = fs::path(pszHome);
 #ifdef MAC_OSX
     // Mac
-    return pathRet / "Library/Application Support/Bitcoin";
+    return pathRet / "Library/Application Support/BitZeny";
 #else
     // Unix
-    return pathRet / ".bitcoin";
+    return pathRet / ".bitzeny";
 #endif
 #endif
 }
@@ -885,12 +886,10 @@ int GetNumCores()
 
 std::string CopyrightHolders(const std::string& strPrefix)
 {
-    std::string strCopyrightHolders = strPrefix + strprintf(_(COPYRIGHT_HOLDERS), _(COPYRIGHT_HOLDERS_SUBSTITUTION));
-
-    // Check for untranslated substitution to make sure Bitcoin Core copyright is not removed by accident
-    if (strprintf(COPYRIGHT_HOLDERS, COPYRIGHT_HOLDERS_SUBSTITUTION).find("Bitcoin Core") == std::string::npos) {
-        strCopyrightHolders += "\n" + strPrefix + "The Bitcoin Core developers";
-    }
+    unsigned short nCopyrightYear = boost::posix_time::second_clock::local_time().date().year();
+    std::string strCopyrightHolders;
+    strCopyrightHolders += "\n" + strprintf(strPrefix, 2009, nCopyrightYear) + " The Bitcoin Core developers";
+    strCopyrightHolders += "\n" + strprintf(strPrefix, 2014, nCopyrightYear) + " The BitZeny Core developers";
     return strCopyrightHolders;
 }
 
