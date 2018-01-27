@@ -176,8 +176,8 @@ public:
         consensus.nSubsidyHalvingInterval = 500000;
         consensus.BIP34Height = 0;
         consensus.BIP34Hash = uint256S("0x00003a0c79f595bddb7f37a22eb63fd23c541ab6a7dd7efd0215e7029bde225c");
-        consensus.BIP65Height = 0x7fffffff;
-        consensus.BIP66Height = 0x7fffffff;
+        consensus.BIP65Height = 12720;
+        consensus.BIP66Height = 12720;
         consensus.powLimit = uint256S("0x3fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 90;
