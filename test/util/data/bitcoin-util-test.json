@@ -10,23 +10,6 @@
     "description": "Creates a blank v1 transaction (output in json)"
   },
   { "exec": "./bitzeny-tx",
-    "args": ["-"],
-    "input": "blanktxv2.hex",
-    "output_cmp": "blanktxv2.hex",
-    "description": "Creates a blank transaction when nothing is piped into bitzeny-tx"
-  },
-  { "exec": "./bitzeny-tx",
-    "args": ["-json","-create"],
-    "output_cmp": "blanktxv2.json",
-    "description": "Creates a blank transaction (output in json)"
-  },
-  { "exec": "./bitzeny-tx",
-    "args": ["-json","-"],
-    "input": "blanktxv2.hex",
-    "output_cmp": "blanktxv2.json",
-    "description": "Creates a blank transaction when nothing is piped into bitzeny-tx (output in json)"
-  },
-  { "exec": "./bitzeny-tx",
     "args": ["-", "delin=1"],
     "input": "tx394b54bb.hex",
     "output_cmp": "tt-delin1-out.hex",
