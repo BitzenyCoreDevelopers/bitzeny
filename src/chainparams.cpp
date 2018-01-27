@@ -77,36 +77,34 @@ public:
         consensus.nSubsidyHalvingInterval = 500000;
         consensus.BIP34Height = 0;
         consensus.BIP34Hash = uint256S("0x000009f7e55e9e3b4781e22bd87a7cfa4acada9e4340d43ca738bf4e9fb8f5ce");
-        consensus.BIP65Height = 0x7fffffff; // TODO
-        consensus.BIP66Height = 0x7fffffff; // TODO
+        consensus.BIP65Height = 1206400;
+        consensus.BIP66Height = 1206400;
         consensus.powLimit = uint256S("0x3fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 90;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
-        consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2020
-        consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
+        consensus.nRuleChangeActivationThreshold = 13440; // 95%
+        consensus.nMinerConfirmationWindow = 13440; // nPowTargetTimespan / nPowTargetSpacing
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
-        // TODO
         // Deployment of BIP68, BIP112, and BIP113.
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1577836800; // January 1, 2020
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1609459200; // January 1, 2021
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1525132800; // May 1, 2019
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1556668800; // May 1, 2020
 
-        // TODO
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1577836800; // January 1, 2020
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1609459200; // January 1, 2021
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1525132800; // May 1, 2019
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1556668800; // May 1, 2020
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000000002e034af36dde");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000a078f5c41e37");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x000000001a130d4518fa2ce9c99683ddd96ee3effeefc355a3daeb8c72e655e4");
+        consensus.defaultAssumeValid = uint256S("0x000000017b95b2d5c417b47b0e31c49ce33309a04addbf28beff587fde752fb6");
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -157,11 +155,11 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data as of block 00000000f8022cd21279bd926e6821c8d156129941fed9f94d3ba152aec9651a (height 1080267).
-            1513452656, // * UNIX timestamp of last known number of transactions
-            1529508,    // * total number of transactions between genesis and that timestamp
+            // Data as of block 00000000f10257390e9967c00d893cb0a0fa61c8585f0eea6c78d7ef6b75e6d4 (height 1119981).
+            1517054263, // * UNIX timestamp of last known number of transactions
+            2034414,    // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
-            0.015       // * estimated number of transactions per second after that timestamp
+            0.020010064 // * estimated number of transactions per second after that timestamp
         };
     }
 };
@@ -176,30 +174,28 @@ public:
         consensus.nSubsidyHalvingInterval = 500000;
         consensus.BIP34Height = 0;
         consensus.BIP34Hash = uint256S("0x00003a0c79f595bddb7f37a22eb63fd23c541ab6a7dd7efd0215e7029bde225c");
-        consensus.BIP65Height = 0x7fffffff;
-        consensus.BIP66Height = 0x7fffffff;
+        consensus.BIP65Height = 12720;
+        consensus.BIP66Height = 12720;
         consensus.powLimit = uint256S("0x3fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 90;
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
-        consensus.nRuleChangeActivationThreshold = 1512; // 75% for testchains
-        consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
+        consensus.nRuleChangeActivationThreshold = 5040; // 75%
+        consensus.nMinerConfirmationWindow = 6720; // nPowTargetTimespan / nPowTargetSpacing / 2
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
-        // TODO
         // Deployment of BIP68, BIP112, and BIP113.
         consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1577836800; // January 1, 2020
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1609459200; // January 1, 2021
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1517097600; // January 28, 2018
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1548633600; // January 28, 2019
 
-        // TODO
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1577836800; // January 1, 2020
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1609459200; // January 1, 2021
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1517097600; // January 28, 2018
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1548633600; // January 28, 2019
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x0");
