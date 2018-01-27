@@ -179,17 +179,6 @@
   },
   { "exec": "./bitzeny-tx",
     "args":
-    ["-create",
-      "in=4d49a71ec9da436f71ec4ee231d04f292a29cd316f598bb7068feccabdc59485:0",
-      "set=privatekeys:[\"5HpHagT65TZzG1PH3CSu63k8DbpvD8s5ip4nEB3kEsreAnchuDf\"]",
-      "set=prevtxs:[{\"txid\":\"4d49a71ec9da436f71ec4ee231d04f292a29cd316f598bb7068feccabdc59485\",\"vout\":0,\"scriptPubKey\":\"76a91491b24bf9f5288532960ac687abb035127b1d28a588ac\"}]",
-      "sign=ALL",
-      "outaddr=0.001:193P6LtvS4nCnkDvM9uXn1gsSRqh4aDAz7"],
-    "output_cmp": "txcreatesignv2.hex",
-    "description": "Creates a new transaction with a single input and a single output, and then signs the transaction"
-  },
-  { "exec": "./bitzeny-tx",
-    "args":
     ["-create", "outpubkey=0:02a5613bd857b7048924264d1e70e08fb2a7e6527d32b7ab1bb993ac59964ff397", "nversion=1"],
     "output_cmp": "txcreateoutpubkey1.hex",
     "description": "Creates a new transaction with a single pay-to-pubkey output"
@@ -253,7 +242,7 @@
     "args":
     ["-create",
      "in=5897de6bd6027a475eadd57019d4e6872c396d0716c4875a5f1a6fcfdf385c1f:0",
-     "outaddr=0.18:13tuJJDR2RgArmgfv6JScSdreahzgc4T6o",
+     "outaddr=0.18:ZeGm46MkY3D96sygu5HFtbgadSaQKKrJV1",
      "outdata=4:54686973204f505f52455455524e207472616e73616374696f6e206f7574707574207761732063726561746564206279206d6f646966696564206372656174657261777472616e73616374696f6e2e"],
     "output_cmp": "txcreatedata1.hex",
     "description": "Creates a new transaction with one input, one address output and one data output"
