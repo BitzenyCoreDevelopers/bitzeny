@@ -3,7 +3,7 @@
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
-        <translation>アドレスまたはラベルを編集するにはダブルクリック</translation>
+        <translation>右クリックでアドレスまたはラベルを編集します</translation>
     </message>
     <message>
         <source>Create a new address</source>
@@ -939,7 +939,7 @@
     </message>
     <message>
         <source>Progress increase per hour</source>
-        <translation>一時間あたりの進捗増加</translation>
+        <translation>進捗状況は一時間ごとに増加します</translation>
     </message>
     <message>
         <source>calculating...</source>
@@ -1118,6 +1118,10 @@
     <message>
         <source>Used for reaching peers via:</source>
         <translation>ピアへ到達するために使われた方法:</translation>
+    </message>
+    <message>
+        <source>Shows, if the supplied default SOCKS5 proxy is used to reach peers via this network type.</source>
+        <translation>このネットワークタイプ経由で、与えられたデフォルトのSOCKS5プロキシを使用してピアに到達した場合に表示する。</translation>
     </message>
     <message>
         <source>IPv4</source>
@@ -1717,6 +1721,10 @@
         <translation>ネットワーク (&amp;N)</translation>
     </message>
     <message>
+        <source>&amp;Clear</source>
+        <translation>クリア(&amp;C)</translation>
+    </message>
+    <message>
         <source>Totals</source>
         <translation>合計</translation>
     </message>
@@ -2074,7 +2082,7 @@
     </message>
     <message>
         <source>Warning: Fee estimation is currently not possible.</source>
-        <translation>警告: 手数料推定昨日は現在利用できません。</translation>
+        <translation>警告: 手数料推定機能は現在利用できません。</translation>
     </message>
     <message>
         <source>collapse fee-settings</source>
@@ -2091,6 +2099,10 @@
     <message>
         <source>Hide</source>
         <translation>隠す</translation>
+    </message>
+    <message>
+        <source>total at least</source>
+        <translation>最小手数料</translation>
     </message>
     <message>
         <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
@@ -2251,6 +2263,10 @@
     <message>
         <source>Payment request expired.</source>
         <translation>支払いリクエストの期限が切れました。</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n block(s)</source>
+        <translation><numerusform>%n ブロック</numerusform></translation>
     </message>
     <message>
         <source>Pay only the required fee of %1</source>
@@ -3110,6 +3126,14 @@
         <translation>コマンドラインと JSON-RPC コマンドを許可</translation>
     </message>
     <message>
+        <source>Accept connections from outside (default: 1 if no -proxy or -connect/-noconnect)</source>
+        <translation>外部からの接続を許可 (初期値: -proxy または -connect/-noconnect を使用していない場合は1)</translation>
+    </message>
+    <message>
+        <source>Connect only to the specified node(s); -noconnect or -connect=0 alone to disable automatic connections</source>
+        <translation>指定されたノードにのみ接続を行う; -noconnect または -connect=0 だけを指定すると自動接続を無効化します</translation>
+    </message>
+    <message>
         <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>MITソフトウェアライセンスのもとで配布されています。付属のファイル %s または %s を参照してください</translation>
     </message>
@@ -3543,6 +3567,10 @@
         <translation>ブロックの検証中...</translation>
     </message>
     <message>
+        <source>Verifying wallet...</source>
+        <translation>ウォレットの検証中...</translation>
+    </message>
+    <message>
         <source>Wallet %s resides outside data directory %s</source>
         <translation>財布 %s はデータ・ディレクトリ%sの外にあります</translation>
     </message>
@@ -3565,6 +3593,10 @@
     <message>
         <source>Bind to given address and whitelist peers connecting to it. Use [host]:port notation for IPv6</source>
         <translation>指定されたアドレスおよび、そこに接続を行ってきたホワイトリストのピアに対してバインドを行います。IPv6の場合には [host]:port 表記を使用してください</translation>
+    </message>
+    <message>
+        <source>Bind to given address to listen for JSON-RPC connections. Use [host]:port notation for IPv6. This option can be specified multiple times (default: bind to all interfaces)</source>
+        <translation>指定されたアドレスに対して JSON-RPC 接続をリッスンしするようバインドします。IPv6の場合には [host]:port 表記を使用してください。このオプションは複数回指定することが可能です (初期値: すべてのインターフェースに対してバインドする)</translation>
     </message>
     <message>
         <source>Create new files with system default permissions, instead of umask 077 (only effective with disabled wallet functionality)</source>
@@ -3601,6 +3633,10 @@
     <message>
         <source>Randomize credentials for every proxy connection. This enables Tor stream isolation (default: %u)</source>
         <translation>認証情報をプロキシー接続ごとにランダム化する。これによりTorストリーム分離をすることができます (規定値: %u)</translation>
+    </message>
+    <message>
+        <source>Set maximum size of high-priority/low-fee transactions in bytes (default: %d)</source>
+        <translation>最優先/最低手数料の最大サイズをバイトで指定 (初期値: %d)</translation>
     </message>
     <message>
         <source>The transaction amount is too small to send after the fee has been deducted</source>
@@ -3699,6 +3735,10 @@
         <translation>トレース/デバッグ情報を debug.log ファイルの代わりにコンソールへ送る</translation>
     </message>
     <message>
+        <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
+        <translation>可能な場合には手数料ゼロのトランザクションとしてトランザクションを送信する (初期値: %u)</translation>
+    </message>
+    <message>
         <source>Show all debugging options (usage: --help -help-debug)</source>
         <translation>すべてのデバッグオプションを表示する (使い方: --help -help-debug)</translation>
     </message>
@@ -3791,6 +3831,10 @@
         <translation>-addnode, -seednode と -connect で DNS ルックアップを許可する</translation>
     </message>
     <message>
+        <source>Loading addresses...</source>
+        <translation>アドレスを読み込んでいます...</translation>
+    </message>
+    <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = トランザクションのメタデータ、例えばアカウントの所有者や支払リクエストの内容を保持する, 2 = トランザクションのメタデータを破棄する)</translation>
     </message>
@@ -3845,6 +3889,10 @@
     <message>
         <source>Output debugging information (default: %u, supplying &lt;category&gt; is optional)</source>
         <translation>デバッグ情報を出力する (初期値: %u, &lt;category&gt; の指定は任意です)</translation>
+    </message>
+    <message>
+        <source>Query for peer addresses via DNS lookup, if low on addresses (default: 1 unless -connect/-noconnect)</source>
+        <translation>保有するピアアドレスが少ない場合、DNS ルックアップによりピアアドレスを問い合わせる (-connect/-noconnect を使っていない場合の初期値: 1)</translation>
     </message>
     <message>
         <source>Sets the serialization of raw transaction or block hex returned in non-verbose mode, non-segwit(0) or segwit(1) (default: %d)</source>
@@ -3929,6 +3977,10 @@
     <message>
         <source>Include IP addresses in debug output (default: %u)</source>
         <translation>デバッグ出力にIPアドレスを含める (初期値: %u)</translation>
+    </message>
+    <message>
+        <source>Invalid -proxy address: '%s'</source>
+        <translation>無効な -proxy アドレス: '%s'</translation>
     </message>
     <message>
         <source>Keypool ran out, please call keypoolrefill first</source>
