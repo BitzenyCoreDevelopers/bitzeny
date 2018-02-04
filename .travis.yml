@@ -71,6 +71,12 @@ script:
     - if [ "$RUN_TESTS" = "true" ]; then travis_wait 30 make $MAKEJOBS check VERBOSE=1; fi
     - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then extended="--extended --exclude pruning,dbcrash"; fi
     - if [ "$RUN_TESTS" = "true" ]; then test/functional/test_runner.py --coverage --quiet ${extended}; fi
+after_success:
+    - AUTHOR=`git log -1 | grep 'Author:' | awk '{$1="";$NF="";print $0}' | sed -e 's/^[ ]*//g'`
+    - test -n $DISCORD_WEBHOOK_URL && echo '{"embeds":[{"title":"['$TRAVIS_JOB_NUMBER':'$HOST'] Build '$TRAVIS_BUILD_NUMBER' succeeded","type":"rich","description":"[`'${TRAVIS_COMMIT:0:7}'`](https://github.com/'$TRAVIS_REPO_SLUG'/commit/'$TRAVIS_COMMIT') '$TRAVIS_COMMIT_MESSAGE' - '$AUTHOR'","url":"https://travis-ci.org/'$TRAVIS_REPO_SLUG'/builds/'$TRAVIS_BUILD_ID'","timestamp":"'`date --utc +%FT%TZ`'","color":2932302,"footer":{"text":"Travis CI"}}]}' | curl -A 'Travis CI' -H 'Content-Type:application/json' -d @- $DISCORD_WEBHOOK_URL
+after_failure:
+    - AUTHOR=`git log -1 | grep 'Author:' | awk '{$1="";$NF="";print $0}' | sed -e 's/^[ ]*//g'`
+    - test -n $DISCORD_WEBHOOK_URL && echo '{"embeds":[{"title":"['$TRAVIS_JOB_NUMBER':'$HOST'] Build '$TRAVIS_BUILD_NUMBER' failed","type":"rich","description":"[`'${TRAVIS_COMMIT:0:7}'`](https://github.com/'$TRAVIS_REPO_SLUG'/commit/'$TRAVIS_COMMIT') '$TRAVIS_COMMIT_MESSAGE' - '$AUTHOR'","url":"https://travis-ci.org/'$TRAVIS_REPO_SLUG'/builds/'$TRAVIS_BUILD_ID'","timestamp":"'`date --utc +%FT%TZ`'","color":13313073,"footer":{"text":"Travis CI"}}]}' | curl -A 'Travis CI' -H 'Content-Type:application/json' -d @- $DISCORD_WEBHOOK_URL
 after_script:
     - echo $TRAVIS_COMMIT_RANGE
     - echo $TRAVIS_COMMIT_LOG
