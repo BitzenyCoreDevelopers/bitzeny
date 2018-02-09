@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=BitZeny Core
+Comment=Connect to the BitZeny P2P Network
+Comment[de]=Verbinde mit dem BitZeny peer-to-peer Netzwerk
+Comment[fr]=BitZeny, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=BitZeny, eşten eşe kriptografik sanal para birimi
+Exec=bitzeny-qt %u
+Terminal=false
+Type=Application
+Icon=bitzeny128
+MimeType=x-scheme-handler/bitzeny;
+Categories=Office;Finance;

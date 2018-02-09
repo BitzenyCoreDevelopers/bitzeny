@@ -1,18 +1,18 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Bitcoin
-Upstream-Contact: Satoshi Nakamoto <satoshin@gmx.com>
- irc://#bitcoin@freenode.net
-Source: https://github.com/bitcoin/bitcoin
+Upstream-Name: BitZeny
+Upstream-Contact: onokatio <onokatio@gmail.com>
+Source: https://github.com/BitzenyCoreDevelopers/bitzeny
 
 Files: *
-Copyright: 2009-2017, Bitcoin Core Developers
+Copyright: 2009-2017, Bitcoin Core Developers & 2018, BitZeny Core Developers
 License: Expat
-Comment: The Bitcoin Core Developers encompasses the current developers listed on bitcoin.org,
+Comment: The BitZeny Core Developers encompasses the current developers listed on bitzeny.info,
          as well as the numerous contributors to the project.
 
 Files: debian/*
 Copyright: 2010-2011, Jonas Smedegaard <dr@jones.dk>
            2011, Matt Corallo <matt@bluematt.me>
+					 2018, 2018, BitZeny Core Developers
 License: GPL-2+
 
 Files: src/qt/res/icons/add.png

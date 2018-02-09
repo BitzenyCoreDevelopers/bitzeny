@@ -1,0 +1,6 @@
+usr/local/bin/bitzeny-qt usr/bin
+share/pixmaps/bitzeny32.xpm usr/share/pixmaps
+share/pixmaps/bitzeny16.xpm usr/share/pixmaps
+share/pixmaps/bitzeny128.png usr/share/pixmaps
+debian/bitzeny-qt.desktop usr/share/applications
+debian/bitzeny-qt.protocol usr/share/kde4/services/
