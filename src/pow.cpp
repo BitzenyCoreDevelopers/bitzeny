@@ -70,6 +70,10 @@ unsigned int static DarkGravityWaveZeny(const CBlockIndex* pindexLast, const Con
         return bnPowLimit.GetCompact();
     }
 
+    // Just return when the chain doesn't expect re-targeting
+    if (params.fPowNoRetargeting)
+        return bnPowLimit.GetCompact();
+
     const CBlockIndex *pindex = pindexLast;
     arith_uint256 bnPastTargetAvg = 0;
 
