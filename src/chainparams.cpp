@@ -80,6 +80,7 @@ public:
         consensus.BIP34Hash = uint256S("0x000009f7e55e9e3b4781e22bd87a7cfa4acada9e4340d43ca738bf4e9fb8f5ce");
         consensus.BIP65Height = 1206400;
         consensus.BIP66Height = 1206400;
+        consensus.Argon2dHeight = 2147483647; // TODO: When will be Argon2d hashing activated?
         consensus.powLimit = uint256S("0x3fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 90;
@@ -185,6 +186,7 @@ public:
         consensus.BIP34Hash = uint256S("0x00003a0c79f595bddb7f37a22eb63fd23c541ab6a7dd7efd0215e7029bde225c");
         consensus.BIP65Height = 12720;
         consensus.BIP66Height = 12720;
+        consensus.Argon2dHeight = 94800;
         consensus.powLimit = uint256S("0x3fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 90;
@@ -272,6 +274,7 @@ public:
         consensus.BIP34Hash = uint256();
         consensus.BIP65Height = 1351; // BIP65 activated on regtest (Used in rpc activation tests)
         consensus.BIP66Height = 1251; // BIP66 activated on regtest (Used in rpc activation tests)
+        consensus.Argon2dHeight = 2014;
         consensus.powLimit = uint256S("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 14 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 90;

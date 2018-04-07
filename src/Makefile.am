@@ -278,7 +278,14 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sha256.h \
   crypto/sha512.cpp \
   crypto/sha512.h \
-  crypto/yescrypt-0.5/yescrypt.c
+  crypto/yescrypt-0.5/yescrypt.c \
+  crypto/argon2/argon2.c \
+  crypto/argon2/core.c \
+  crypto/argon2/blake2/blake2b.c \
+  crypto/argon2/thread.c \
+  crypto/argon2/encoding.c \
+  crypto/argon2/opt.c \
+  crypto/argon2/hash.c
 
 noinst_HEADERS = \
   crypto/yescrypt-0.5/sha256.h \
@@ -288,7 +295,11 @@ noinst_HEADERS = \
   crypto/yescrypt-0.5/yescrypt-best_c.h \
   crypto/yescrypt-0.5/yescrypt-opt_c.h \
   crypto/yescrypt-0.5/yescrypt-platform_c.h \
-  crypto/yescrypt-0.5/yescrypt-simd_c.h
+  crypto/yescrypt-0.5/yescrypt-simd_c.h \
+  crypto/argon2/argon2.h \
+  crypto/argon2/core.h \
+  crypto/argon2/thread.h \
+  crypto/argon2/encoding.h
 
 if USE_ASM
 crypto_libbitcoin_crypto_a_SOURCES += crypto/sha256_sse4.cpp

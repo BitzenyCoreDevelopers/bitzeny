@@ -118,6 +118,7 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
     AssertLockHeld(cs_main);
     UniValue result(UniValue::VOBJ);
     result.push_back(Pair("hash", blockindex->GetBlockHash().GetHex()));
+    result.push_back(Pair("powhash", blockindex->GetBlockHeader().GetHashPoW(blockindex->nHeight, Params().GetConsensus()).GetHex()));
     int confirmations = -1;
     // Only report confirmations if the block is on the main chain
     if (chainActive.Contains(blockindex))

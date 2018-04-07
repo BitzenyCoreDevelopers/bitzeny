@@ -182,6 +182,7 @@ public:
 };
 
 extern "C" void yescrypt_hash(const char *input, char *output);
+extern "C" void argon2d_hash(const char *input, char *output);
 
 class CHashWriterYescrypt: public CHashWriter
 {
@@ -211,6 +212,34 @@ public:
     }
 };
 
+class CHashWriterArgon2d: public CHashWriter
+{
+private:
+    std::vector<unsigned char> buf;
+
+public:
+
+    CHashWriterArgon2d(int nTypeIn, int nVersionIn) : CHashWriter(nTypeIn, nVersionIn) {}
+
+    void write(const char *pch, size_t size) {
+        buf.insert(buf.end(), pch, pch + size);
+    }
+
+    uint256 GetHash() {
+        uint256 result;
+        assert(buf.size() == 80);
+        argon2d_hash((const char*)buf.data(), (char*)&result);
+        return result;
+    }
+
+    template<typename T>
+    CHashWriterArgon2d& operator<<(const T& obj) {
+        // Serialize to this stream
+        ::Serialize(*this, obj);
+        return (*this);
+    }
+};
+
 /** Compute the 256-bit hash of an object's serialization. */
 template<typename T>
 uint256 SerializeHash(const T& obj, int nType=SER_GETHASH, int nVersion=PROTOCOL_VERSION)
@@ -224,6 +253,14 @@ template<typename T>
 uint256 SerializeHashYescrypt(const T& obj, int nType=SER_GETHASH, int nVersion=PROTOCOL_VERSION)
 {
     CHashWriterYescrypt ss(nType, nVersion);
+    ss << obj;
+    return ss.GetHash();
+}
+
+template<typename T>
+uint256 SerializeHashArgon2d(const T& obj, int nType=SER_GETHASH, int nVersion=PROTOCOL_VERSION)
+{
+    CHashWriterArgon2d ss(nType, nVersion);
     ss << obj;
     return ss.GetHash();
 }

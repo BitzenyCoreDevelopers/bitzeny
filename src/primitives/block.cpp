@@ -15,6 +15,14 @@ uint256 CBlockHeader::GetHash() const
     return SerializeHashYescrypt(*this);
 }
 
+uint256 CBlockHeader::GetHashPoW(int nHeight, const Consensus::Params& consensusParams) const
+{
+    if (nHeight >= consensusParams.Argon2dHeight)
+        return SerializeHashArgon2d(*this);
+
+    return SerializeHashYescrypt(*this);
+}
+
 std::string CBlock::ToString() const
 {
     std::stringstream s;

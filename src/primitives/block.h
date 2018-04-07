@@ -6,6 +6,7 @@
 #ifndef BITCOIN_PRIMITIVES_BLOCK_H
 #define BITCOIN_PRIMITIVES_BLOCK_H
 
+#include <consensus/params.h>
 #include <primitives/transaction.h>
 #include <serialize.h>
 #include <uint256.h>
@@ -61,6 +62,8 @@ public:
     }
 
     uint256 GetHash() const;
+
+    uint256 GetHashPoW(int nHeight, const Consensus::Params& consensusParams) const;
 
     int64_t GetBlockTime() const
     {
