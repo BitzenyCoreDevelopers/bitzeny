@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2018 The BitZeny Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -42,7 +43,7 @@ public:
     }
 
     template<typename T>
-    OverrideStream<Stream>& operator>>(T& obj)
+    OverrideStream<Stream>& operator>>(T&& obj)
     {
         // Unserialize from this stream
         ::Unserialize(*this, obj);
@@ -401,7 +402,7 @@ public:
     }
 
     template<typename T>
-    CDataStream& operator>>(T& obj)
+    CDataStream& operator>>(T&& obj)
     {
         // Unserialize from this stream
         ::Unserialize(*this, obj);
@@ -545,7 +546,7 @@ public:
     }
 
     template<typename T>
-    CAutoFile& operator>>(T& obj)
+    CAutoFile& operator>>(T&& obj)
     {
         // Unserialize from this stream
         if (!file)
@@ -688,7 +689,7 @@ public:
     }
 
     template<typename T>
-    CBufferedFile& operator>>(T& obj) {
+    CBufferedFile& operator>>(T&& obj) {
         // Unserialize from this stream
         ::Unserialize(*this, obj);
         return (*this);

@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
+// Copyright (c) 2018 The BitZeny Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,6 +10,7 @@
 #include "primitives/transaction.h"
 #include "script/script.h"
 #include "serialize.h"
+#include "span.h"
 
 class CKeyID;
 class CPubKey;
@@ -59,12 +61,12 @@ public:
     void Serialize(Stream &s) const {
         std::vector<unsigned char> compr;
         if (Compress(compr)) {
-            s << CFlatData(compr);
+            s << MakeSpan(compr);
             return;
         }
         unsigned int nSize = script.size() + nSpecialScripts;
         s << VARINT(nSize);
-        s << CFlatData(script);
+        s << MakeSpan(script);
     }
 
     template<typename Stream>
@@ -73,7 +75,7 @@ public:
         s >> VARINT(nSize);
         if (nSize < nSpecialScripts) {
             std::vector<unsigned char> vch(GetSpecialSize(nSize), 0x00);
-            s >> REF(CFlatData(vch));
+            s >> MakeSpan(vch);
             Decompress(nSize, vch);
             return;
         }
@@ -84,7 +86,7 @@ public:
             s.ignore(nSize);
         } else {
             script.resize(nSize);
-            s >> REF(CFlatData(script));
+            s >> MakeSpan(script);
         }
     }
 };
