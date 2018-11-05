@@ -30,6 +30,7 @@ LIBBITCOIN_CONSENSUS=libbitcoin_consensus.a
 LIBBITCOIN_CLI=libbitcoin_cli.a
 LIBBITCOIN_UTIL=libbitcoin_util.a
 LIBBITCOIN_CRYPTO_BASE=crypto/libbitcoin_crypto_base.a
+LIBBITCOIN_CRYPTO_ALTHASH=crypto/libbitcoin_crypto_althash.a
 LIBBITCOINQT=qt/libbitcoinqt.a
 LIBSECP256K1=secp256k1/libsecp256k1.la
 
@@ -57,6 +58,8 @@ LIBBITCOIN_CRYPTO_SHANI = crypto/libbitcoin_crypto_shani.a
 LIBBITCOIN_CRYPTO += $(LIBBITCOIN_CRYPTO_SHANI)
 endif
 
+LIBBITCOIN_CRYPTO += $(LIBBITCOIN_CRYPTO_ALTHASH)
+
 $(LIBSECP256K1): $(wildcard secp256k1/src/*.h) $(wildcard secp256k1/src/*.c) $(wildcard secp256k1/include/*)
 	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C $(@D) $(@F)
 
@@ -64,6 +67,7 @@ $(LIBSECP256K1): $(wildcard secp256k1/src/*.h) $(wildcard secp256k1/src/*.c) $(w
 # But to build the less dependent modules first, we manually select their order here:
 EXTRA_LIBRARIES += \
   $(LIBBITCOIN_CRYPTO) \
+  $(LIBBITCOIN_CRYPTO_ALTHASH) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_CONSENSUS) \
@@ -288,6 +292,17 @@ libbitcoin_wallet_a_SOURCES = \
   wallet/walletutil.cpp \
   wallet/coinselection.cpp \
   $(BITCOIN_CORE_H)
+
+# yespower 1.0
+crypto_libbitcoin_crypto_althash_a_CFLAGS = $(AM_CFLAGS)
+crypto_libbitcoin_crypto_althash_a_CFLAGS += -fPIC -O2 -fomit-frame-pointer
+crypto_libbitcoin_crypto_althash_a_SOURCES = \
+  crypto/yespower-1.0.0/sha256.c \
+  crypto/yespower-1.0.0/sha256.h \
+  crypto/yespower-1.0.0/sysendian.h \
+  crypto/yespower-1.0.0/wrapper.c \
+  crypto/yespower-1.0.0/yespower-opt.c \
+  crypto/yespower-1.0.0/yespower.h
 
 # crypto primitives library
 crypto_libbitcoin_crypto_base_a_CPPFLAGS = $(AM_CPPFLAGS)

@@ -10,9 +10,13 @@
 #include <utilstrencodings.h>
 #include <crypto/common.h>
 
+extern "C" void yespower_hash(const void *input, void *output);
+
 uint256 CBlockHeader::GetHash() const
 {
-    return SerializeHash(*this);
+  uint256 hash;
+  yespower_hash(BEGIN(nVersion), &hash);
+  return hash;
 }
 
 std::string CBlock::ToString() const
